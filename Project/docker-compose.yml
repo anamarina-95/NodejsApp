@@ -1,0 +1,35 @@
+version: '3.5'
+services:
+
+  webapp:
+    container_name: nodeapp_demo
+    image: anamarina95/nodejs_store_app:nodestoreapp
+    ports:
+      - 49160:3000
+    command: npm run start 
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://postgres@postgres/OnlineStore_Data
+    restart: unless-stopped
+
+  postgres:
+    container_name: postgres_demo
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Think@95
+      POSTGRES_DB: OnlineStore_Data
+    volumes:
+       - postgres-db:/data/postgres
+    ports:
+      - 5432
+    restart: unless-stopped
+
+
+volumes:
+  postgres-db:
+    driver: local

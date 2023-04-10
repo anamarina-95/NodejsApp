@@ -5,7 +5,7 @@ services:
     container_name: nodeapp_demo
     image: anamarina95/nodejs_store_app:nodestoreapp
     ports:
-      - 49160:3000
+      - 0.0.0.0:3000:3000
     command: npm run start 
     volumes:
       - .:/usr/app/

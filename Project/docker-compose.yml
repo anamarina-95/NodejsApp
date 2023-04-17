@@ -1,6 +1,16 @@
 version: '3.5'
 services:
 
+  ngnix:
+    container_name: ngnix_demo
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/usr/share/nginx/html
+    links:
+      - webapp
+
   webapp:
     container_name: nodeapp_demo
     image: anamarina95/nodejs_store_app:nodestoreapp
